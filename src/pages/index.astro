@@ -1,0 +1,294 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { tips, liveCss } from '../data/tooltips';
+
+// Cross-promo: the other tools in the Colorion network, surfaced in the header
+// dropdown. `?ref=` attributes the referral back to this site.
+const REF = 'csstooltips.colorion.co';
+const colorionLinks = [
+  { label: 'Colorion', href: 'https://www.colorion.co' },
+  { label: '2 Color Combinations', href: 'https://2colors.colorion.co' },
+  { label: 'Color Palettes', href: 'https://colorpalettes.colorion.co' },
+  { label: 'Palette Generator', href: 'https://palettegenerator.colorion.co' },
+  { label: 'Material Colors', href: 'https://material.colorion.co' },
+  { label: 'Mobile Palette', href: 'https://mobilepalette.colorion.co' },
+  { label: 'Gradients', href: 'https://gradients.colorion.co' },
+  { label: 'Gradient Buttons', href: 'https://gradientbuttons.colorion.co' },
+  { label: 'Animated Buttons', href: 'https://animatedbuttons.colorion.co' },
+  { label: 'CSS Loaders', href: 'https://cssloaders.colorion.co' },
+];
+---
+
+<Layout
+  title="CSS Tooltip Library — pure-CSS ::after tooltips, free to copy"
+  description="A library of pure-CSS tooltips in 8 directions with fade and slide reveals — no JavaScript, no dependencies. Click any tooltip to view and copy its CSS."
+>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">T</div>
+      <span class="mono">CSS Tooltip Library</span>
+    </div>
+    <div class="header-right">
+      <details class="menu" id="colorion-menu">
+        <summary class="menu-trigger mono">
+          Colorion Tools
+          <span class="menu-caret" aria-hidden="true">▾</span>
+        </summary>
+        <ul class="menu-list">
+          {
+            colorionLinks.map((link) => (
+              <li>
+                <a
+                  class="mono"
+                  href={`${link.href}?ref=${REF}`}
+                  target="_blank"
+                  rel="noopener"
+                  referrerpolicy="no-referrer-when-downgrade"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+      <div class="header-status mono">
+        <span class="pulse-dot"></span>
+        {tips.length} tooltips · MIT
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="hero-tag mono">Pure CSS · Copy &amp; paste</span>
+    <h1>{tips.length} <em>CSS tooltips</em>,<br />free to copy.</h1>
+    <p>
+      Pure-CSS <code>::after</code> tooltips in 8 directions with fade and slide
+      reveals — no JavaScript, no dependencies. The text lives in a single
+      <code>data-tip</code> attribute. Copy the self-contained <code>CSS</code>
+      for any tooltip, or grab a ready-made <code>Prompt</code> to have your
+      coding agent recreate it. Each snippet paints with a single
+      <code>--tip-bg</code> token and respects <code>prefers-reduced-motion</code>.
+    </p>
+  </section>
+
+  <main class="library">
+    <div class="panel">
+      <div class="library-head">
+        <span class="mono">Hover a chip, then click to copy its CSS</span>
+        <span class="mono">{tips.length} tooltips</span>
+      </div>
+
+      <div class="grid" id="tooltip-grid">
+        {
+          tips.map((tip, i) => (
+            <article
+              class="cell"
+              role="button"
+              tabindex="0"
+              data-key={String(i + 1)}
+              data-name={tip.name}
+              data-index={String(i + 1).padStart(2, '0')}
+              aria-label={`View CSS for ${tip.name} tooltip`}
+            >
+              <span class="cell-index mono">{String(i + 1).padStart(2, '0')}</span>
+              <div class="cell-actions">
+                <button class="cell-action mono" type="button" data-action="prompt" tabindex="-1" aria-label={`Copy LLM prompt for ${tip.name} tooltip`}>◳ Prompt</button>
+                <button class="cell-action mono" type="button" data-action="css" tabindex="-1" aria-label={`View CSS for ${tip.name} tooltip`}>⧉ CSS</button>
+              </div>
+              <div class="stage">
+                <button class={`tip tp-${i + 1}`} type="button" tabindex="-1" data-tip={`${tip.name} tooltip`}>
+                  Hover me
+                </button>
+              </div>
+              <h3>{tip.name}</h3>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <span class="mono">CSS Tooltip Library</span>
+    <nav class="footer-links mono">
+      <a href="https://colorion.co?ref=csstooltips.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">Colorion</a>
+      <a href="https://2colors.colorion.co?ref=csstooltips.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">2 Colors</a>
+      <a href="https://gradientbuttons.colorion.co?ref=csstooltips.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">Gradient Buttons</a>
+      <a href="https://animatedbuttons.colorion.co?ref=csstooltips.colorion.co" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">Animated Buttons</a>
+      <a href="https://github.com/ckissi/colorion-css-tooltips" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <span class="mono">Pure CSS · No dependencies · MIT licensed</span>
+    <a class="footer-badge" href="https://sevalla.com?ref=csstooltips.colorion.co" target="_blank" rel="noopener">
+      <img src="/hosted-on-sevalla.png" alt="Hosted on Sevalla" width="230" height="73" loading="lazy" />
+    </a>
+  </footer>
+
+  <!-- Copy-to-clipboard modal -->
+  <div class="modal-overlay" id="css-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-head">
+        <div class="modal-title-group">
+          <span class="modal-index mono" id="modal-index"></span>
+          <h2 class="modal-title mono" id="modal-title"></h2>
+        </div>
+        <button class="modal-close mono" id="modal-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-preview">
+        <div class="stage" id="modal-preview"></div>
+      </div>
+      <div class="modal-code-wrap">
+        <pre class="modal-code"><code id="modal-code"></code></pre>
+      </div>
+      <div class="modal-foot">
+        <span class="mono modal-hint" id="modal-hint">Pure CSS · self-contained</span>
+        <button class="modal-copy mono" id="modal-copy">Copy CSS</button>
+      </div>
+    </div>
+  </div>
+
+  <style is:global set:html={liveCss}></style>
+</Layout>
+
+<script>
+  // ---------- Copy-to-clipboard modal ----------
+  type Mode = 'css' | 'prompt';
+  type TooltipData = { snippets: Record<string, string>; prompts: Record<string, string> };
+
+  // The CSS snippets + LLM prompts live in a static JSON file rather than inline,
+  // so they don't bloat the document. Fetched once, on first use.
+  let dataPromise: Promise<TooltipData> | undefined;
+  const loadData = () =>
+    (dataPromise ??= fetch('/tooltip-data.json').then((r) => r.json() as Promise<TooltipData>));
+
+  const MODE_CONFIG: Record<Mode, { key: keyof TooltipData; copyLabel: string; hint: string }> = {
+    css: { key: 'snippets', copyLabel: 'Copy CSS', hint: 'Pure CSS · self-contained' },
+    prompt: { key: 'prompts', copyLabel: 'Copy prompt', hint: 'LLM prompt · paste into your coding agent' },
+  };
+
+  // Warm the cache as soon as the user signals intent (pointer over the grid).
+  const grid = document.getElementById('tooltip-grid');
+  grid?.addEventListener('pointerenter', loadData, { once: true });
+
+  const cells = Array.from(document.querySelectorAll<HTMLElement>('.cell'));
+  const overlay = document.getElementById('css-modal')!;
+  const modalIndex = document.getElementById('modal-index')!;
+  const modalTitle = document.getElementById('modal-title')!;
+  const modalHint = document.getElementById('modal-hint')!;
+  const modalPreview = document.getElementById('modal-preview')!;
+  const modalCode = document.getElementById('modal-code')!;
+  const copyBtn = document.getElementById('modal-copy') as HTMLButtonElement;
+  const closeBtn = document.getElementById('modal-close')!;
+
+  let lastFocused: HTMLElement | null = null;
+  let copyReset: number | undefined;
+  let currentMode: Mode = 'css';
+  let currentText = ''; // the copyable snippet for the open modal ('' while loading)
+  let openToken = 0; // guards against races when switching tooltips mid-fetch
+
+  async function openModal(cell: HTMLElement, mode: Mode = 'css') {
+    const key = cell.dataset.key!;
+    const config = MODE_CONFIG[mode];
+    const token = ++openToken;
+
+    // Show the modal shell immediately; the code text fills in once data loads.
+    currentMode = mode;
+    currentText = '';
+    modalIndex.textContent = cell.dataset.index || '';
+    modalTitle.textContent = cell.dataset.name || '';
+    modalHint.textContent = config.hint;
+    modalCode.textContent = 'Loading…';
+
+    // clone the live tooltip trigger for the preview
+    const tipEl = cell.querySelector('.stage > *');
+    modalPreview.replaceChildren(tipEl ? tipEl.cloneNode(true) : document.createTextNode(''));
+
+    copyBtn.textContent = config.copyLabel;
+    copyBtn.classList.remove('copied');
+
+    lastFocused = cell;
+    overlay.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    copyBtn.focus();
+
+    let text = '';
+    try {
+      text = (await loadData())[config.key][key] || '';
+    } catch {
+      text = '';
+    }
+    if (token !== openToken) return; // a newer open superseded this one
+    currentText = text;
+    modalCode.textContent = text || 'Failed to load — please try again.';
+  }
+
+  function closeModal() {
+    overlay.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+    modalPreview.replaceChildren();
+    lastFocused?.focus();
+  }
+
+  async function copyCss() {
+    const text = currentText;
+    if (!text) return; // data not loaded yet (or failed) — nothing to copy
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      // fallback for non-secure contexts
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    copyBtn.textContent = 'Copied ✓';
+    copyBtn.classList.add('copied');
+    window.clearTimeout(copyReset);
+    copyReset = window.setTimeout(() => {
+      copyBtn.textContent = MODE_CONFIG[currentMode].copyLabel;
+      copyBtn.classList.remove('copied');
+    }, 1800);
+  }
+
+  cells.forEach((cell) => {
+    cell.addEventListener('click', (e) => {
+      const action = (e.target as HTMLElement).closest<HTMLElement>('[data-action]');
+      openModal(cell, action?.dataset.action === 'prompt' ? 'prompt' : 'css');
+    });
+    cell.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(cell);
+      }
+    });
+  });
+
+  copyBtn.addEventListener('click', copyCss);
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !overlay.hasAttribute('hidden')) closeModal();
+  });
+
+  // ---------- Header dropdown (Colorion tools) ----------
+  // <details> handles open/close natively; this just closes it when the user
+  // clicks away, presses Escape, or picks a destination.
+  const menu = document.getElementById('colorion-menu') as HTMLDetailsElement | null;
+  if (menu) {
+    document.addEventListener('click', (e) => {
+      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) menu.open = false;
+    });
+    menu.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => { menu.open = false; })
+    );
+  }
+</script>

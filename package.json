@@ -1,0 +1,18 @@
+{
+  "name": "css-tooltips",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Csaba Kissi",
+  "description": "A library of pure-CSS tooltips in 8 directions with fade and slide reveals — no JavaScript, no dependencies. Click any tooltip to view and copy its CSS.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.16.18"
+  }
+}

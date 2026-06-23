@@ -1,0 +1,62 @@
+# build output
+dist/
+.output/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# environment variables
+.env
+.env.production
+.env.development
+.env.local
+.env.*.local
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# editors / IDEs
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# package manager caches / lock metadata
+.npm
+.pnpm-store/
+.yarn/
+.eslintcache
+
+# misc caches
+.cache/
+.temp/
+.tmp/
+
+# AI assistant / Claude artifacts (do not publish)
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.claude.json
+.cursor/
+.aider*
+.continue/
