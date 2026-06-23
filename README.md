@@ -2,6 +2,8 @@
 
 A library of **pure-CSS tooltips** in 8 directions with fade and slide reveals — no JavaScript, no dependencies. Click any tooltip to view and copy its CSS.
 
+🔗 **Live site:** [tooltips.colorion.co](https://tooltips.colorion.co)
+
 Built with [Astro](https://astro.build).
 
 ## Features
@@ -51,6 +53,10 @@ src/
   styles/global.css         # site styling
 public/fonts/               # self-hosted fonts
 ```
+
+## Hosting
+
+Hosted on [Sevalla](https://sevalla.com).
 
 ## License
 
